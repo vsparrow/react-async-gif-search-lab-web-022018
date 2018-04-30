@@ -8,15 +8,18 @@ class GifSearch extends React.Component{
   }
 
   handleChange = (event)=>{
-    console.log(event.target.value);
     this.setState({searchValue: event.target.value})
   }
   handleSubmit = (event)=>{
     event.preventDefault();
-    console.log("handleSubmit");
-    console.log(event);
     //send back searchValue to parent to do something.
+    // this.setState({callbackValue: this.state.searchValue})
+    let returnValue = this.state.searchValue
+    // this.props.handleSearch(returnValue)
+    this.setState({searchValue: ""}, ()=>{ this.props.handleSearch(returnValue)})
+    // this.props.handleSearch(this.state.searchValue)
     //clear searchValue
+    // this.setState({searchValue: ""})
   }
 
   render(){
@@ -26,7 +29,7 @@ class GifSearch extends React.Component{
         <br/>
         Enter a Search Term
         <form className="" onSubmit={this.handleSubmit}>
-        <input type="text" name="" value={this.state.input} placeholder="Enter text here" onChange={this.handleChange}/>
+        <input type="text" name="" value={this.state.searchValue} placeholder="Enter text here" onChange={this.handleChange}/>
         <input type="submit" name="" value="Find GIFs"/>
         </form>
       </div>

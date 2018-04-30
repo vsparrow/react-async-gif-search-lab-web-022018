@@ -2,12 +2,21 @@ import React, {Component} from 'react'
 import GifSearch from '../components/GifSearch'
 
 class GifListContainer extends React.Component{
+  constructor(){
+    super()
+    this.state={parentSearchValue: ""}
+  }
+
+  handleSearch=(searchValue)=>{
+    this.setState({parentSearchValue:  searchValue})
+  }
 
   render(){
     return(
       <div>
         Hi from GifListContainer
-        <GifSearch />
+        <GifSearch handleSearch={this.handleSearch}/>
+        {this.state.parentSearchValue}
       </div>
     )//return
   }//render
