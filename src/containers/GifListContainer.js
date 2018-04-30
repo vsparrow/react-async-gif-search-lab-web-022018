@@ -4,13 +4,15 @@ import GifSearch from '../components/GifSearch'
 class GifListContainer extends React.Component{
   constructor(){
     super()
-    this.state={parentSearchValue: "", gifarray: []}
+    this.state={ gifarray: []}
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot){
+  // componentDidUpdate(prevProps, prevState, snapshot){
+  callAPI(searchValue){
     // if(this.state.parentSearchValue !== ""){
       let url = "http://api.giphy.com/v1/gifs/search?q="
-      let query = this.state.parentSearchValue
+      // let query = this.state.parentSearchValue
+      let query = searchValue
       let key = "&api_key=dc6zaTOxFJmzC"
       fetch(url+query+key)
       .then(res => res.json())
@@ -31,7 +33,8 @@ class GifListContainer extends React.Component{
   }//getJSON
 
   handleSearch=(searchValue)=>{
-    this.setState({parentSearchValue:  searchValue})
+    // this.setState({parentSearchValue:  searchValue})
+    this.callAPI(searchValue)
   }//handleSearch
 
   render(){
