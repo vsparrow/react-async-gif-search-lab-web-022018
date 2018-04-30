@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import GifSearch from '../components/GifSearch'
+import GifList from '../components/GifList'
 
 class GifListContainer extends React.Component{
   constructor(){
@@ -22,13 +23,21 @@ class GifListContainer extends React.Component{
   }//componentDidUpdate
 
   getJSON=(json)=>{
-    // console.log(json);
+    console.log(json);
+    console.log(json.data[0].images.downsized_small.mp4);
     //create array of 3 gifs
     // console.log(json.data);
-    let gifarray = json.data.map(gif => gif.url)
+    // let gifarray = json.data.map(gif => gif.url)
+    // let gifarray = json.data.map(gif => gif.images.downsized_small.mp4)
+    let gifarray = json.data.map(gif => gif.images.fixed_width_small.url)
     // console.log(gifarray.slice(0,3));
     console.log(gifarray);
-    this.setState({gifarray: gifarray.slice(0,3)});
+    let slice = gifarray.slice(0,3)
+    let x = slice.map(gif => <li><img src={gif} /></li>)
+    console.log("logging li");
+    console.log(x);
+    // this.setState({gifarray: gifarray.slice(0,3)});
+    this.setState({gifarray: x});
 
   }//getJSON
 
@@ -37,13 +46,20 @@ class GifListContainer extends React.Component{
     this.callAPI(searchValue)
   }//handleSearch
 
+  // show = ()=>{
+  //   let x =this.props.gifs.map(gif => <li><img src={gif} /></li>)
+  //   console.log(x);
+  // }
+  //
+
   render(){
     return(
       <div>
         Hi from GifListContainer
         <GifSearch handleSearch={this.handleSearch}/>
-        {this.state.parentSearchValue}
-        {this.state.gifarray}
+
+        <br/>
+        <GifList gifs={this.state.gifarray}/>
       </div>
     )//return
   }//render
