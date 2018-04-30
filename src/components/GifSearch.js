@@ -25,8 +25,7 @@ class GifSearch extends React.Component{
   render(){
     return(
       <div>
-        Hi From Gif Search
-        <br/>
+
         Enter a Search Term
         <form className="" onSubmit={this.handleSubmit}>
         <input type="text" name="" value={this.state.searchValue} placeholder="Enter text here" onChange={this.handleChange}/>
